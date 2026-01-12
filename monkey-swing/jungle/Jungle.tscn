@@ -1,0 +1,36 @@
+[gd_scene load_steps=6 format=3 uid="uid://cuwfi1kmekxs8"]
+
+[ext_resource type="Script" uid="uid://bbyf7emrft17v" path="res://jungle/jungle.gd" id="1_4ldcj"]
+[ext_resource type="PackedScene" uid="uid://ca4dkddej25x" path="res://monkey/Monkey.tscn" id="1_blw3f"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_blw3f"]
+sky_top_color = Color(0.23000002, 0.5636667, 1, 1)
+sky_horizon_color = Color(0.86, 0.18059999, 0.7127966, 1)
+sky_curve = 0.42426416
+ground_bottom_color = Color(0.1539, 0.81, 0.186705, 1)
+ground_horizon_color = Color(0.86, 0.18059999, 0.7127966, 1)
+ground_curve = 0.25992045
+
+[sub_resource type="Sky" id="Sky_4ldcj"]
+sky_material = SubResource("ProceduralSkyMaterial_blw3f")
+
+[sub_resource type="Environment" id="Environment_blw3f"]
+background_mode = 2
+sky = SubResource("Sky_4ldcj")
+
+[node name="Jungle" type="Node3D"]
+script = ExtResource("1_4ldcj")
+
+[node name="Monkey" parent="." instance=ExtResource("1_blw3f")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.016649, 0)
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
+size = Vector3(36.121826, 1, 31.057617)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_blw3f")

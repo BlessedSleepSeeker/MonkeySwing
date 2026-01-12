@@ -1,0 +1,120 @@
+[gd_scene load_steps=20 format=3 uid="uid://ca4dkddej25x"]
+
+[ext_resource type="Script" uid="uid://s1oekavjwvj7" path="res://monkey/monkey.gd" id="1_ivco1"]
+[ext_resource type="PackedScene" uid="uid://dglb4bxycqdhl" path="res://monkey/skin/MonkeySkin.tscn" id="2_jgt8y"]
+[ext_resource type="PackedScene" uid="uid://dfvrcp5lrv2hw" path="res://monkey/camera/MouseFollowCamera.tscn" id="3_ciap6"]
+[ext_resource type="Script" uid="uid://c2s7bjdg4uolq" path="res://monkey/state_machine/state_machine.gd" id="4_sghfs"]
+[ext_resource type="Script" uid="uid://cu44wt5468u5p" path="res://monkey/state_machine/states/idle.gd" id="5_bgwvf"]
+[ext_resource type="Script" uid="uid://limdfqv1yvnx" path="res://monkey/state_machine/states/walk.gd" id="6_6tjul"]
+[ext_resource type="Script" uid="uid://121yygachhxm" path="res://monkey/state_machine/states/run.gd" id="7_c1ut0"]
+[ext_resource type="PackedScene" uid="uid://co75xjj6oudb4" path="res://sounds/utils/random_stream_player.tscn" id="8_1f6af"]
+[ext_resource type="Script" uid="uid://dlvacdf1noi48" path="res://monkey/state_machine/states/jump.gd" id="9_ktmr7"]
+[ext_resource type="Script" uid="uid://bf6dv1jvpucqc" path="res://monkey/physics/character_physics.gd" id="10_jqkgq"]
+[ext_resource type="Script" uid="uid://2yki1u1wwicx" path="res://monkey/state_machine/states/double_jump.gd" id="11_fxt3k"]
+[ext_resource type="Script" uid="uid://pdypd0ws2yoi" path="res://monkey/state_machine/states/fall.gd" id="12_lqiej"]
+[ext_resource type="Script" uid="uid://cprj642p3rkie" path="res://monkey/state_machine/states/land.gd" id="13_icq4f"]
+[ext_resource type="Script" uid="uid://cu0ui5bqe7meb" path="res://monkey/state_machine/states/cinematic.gd" id="14_ocgks"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jgt8y"]
+radius = 0.49414063
+height = 1.1166992
+
+[sub_resource type="Resource" id="Resource_6vh80"]
+script = ExtResource("10_jqkgq")
+FRICTION = 0.0
+metadata/_custom_type_script = "uid://dba7awsrs6b6y"
+
+[sub_resource type="Resource" id="Resource_t4ejd"]
+script = ExtResource("10_jqkgq")
+JUMP_IMPULSE = 15.0
+FRICTION = 0.0
+metadata/_custom_type_script = "uid://dba7awsrs6b6y"
+
+[sub_resource type="Resource" id="Resource_1kvii"]
+script = ExtResource("10_jqkgq")
+FRICTION = 0.0
+metadata/_custom_type_script = "uid://dba7awsrs6b6y"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s7moa"]
+
+[node name="Monkey" type="CharacterBody3D"]
+collision_mask = 7
+script = ExtResource("1_ivco1")
+
+[node name="MonkeySkin" parent="." instance=ExtResource("2_jgt8y")]
+unique_name_in_owner = true
+
+[node name="Hitbox" type="CollisionShape3D" parent="."]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57006836, 0)
+shape = SubResource("CapsuleShape3D_jgt8y")
+
+[node name="MouseFollowCamera" parent="." instance=ExtResource("3_ciap6")]
+unique_name_in_owner = true
+
+[node name="StateMachine" type="Node" parent="."]
+unique_name_in_owner = true
+script = ExtResource("4_sghfs")
+initial_state = NodePath("Idle")
+
+[node name="Idle" type="Node" parent="StateMachine"]
+script = ExtResource("5_bgwvf")
+fidget_chance = 0
+
+[node name="FadeCrosshairTimer" type="Timer" parent="StateMachine/Idle"]
+wait_time = 3.0
+one_shot = true
+
+[node name="Walk" type="Node" parent="StateMachine"]
+script = ExtResource("6_6tjul")
+
+[node name="Run" type="Node" parent="StateMachine"]
+script = ExtResource("7_c1ut0")
+
+[node name="RandomStreamPlayer" parent="StateMachine/Run" instance=ExtResource("8_1f6af")]
+bus = &"Master"
+
+[node name="AnimationLoopingTimer" type="Timer" parent="StateMachine/Run"]
+
+[node name="Jump" type="Node" parent="StateMachine"]
+script = ExtResource("9_ktmr7")
+update_max_speed_on_enter = true
+physics_parameters = SubResource("Resource_6vh80")
+
+[node name="RandomStreamPlayer" parent="StateMachine/Jump" instance=ExtResource("8_1f6af")]
+bus = &"Master"
+no_repeat = false
+
+[node name="DoubleJump" type="Node" parent="StateMachine"]
+script = ExtResource("11_fxt3k")
+update_max_speed_on_enter = true
+physics_parameters = SubResource("Resource_t4ejd")
+
+[node name="RandomStreamPlayer" parent="StateMachine/DoubleJump" instance=ExtResource("8_1f6af")]
+bus = &"Master"
+no_repeat = false
+
+[node name="Fall" type="Node" parent="StateMachine"]
+script = ExtResource("12_lqiej")
+update_max_speed_on_enter = true
+physics_parameters = SubResource("Resource_1kvii")
+
+[node name="Land" type="Node" parent="StateMachine"]
+script = ExtResource("13_icq4f")
+
+[node name="RandomStreamPlayer" parent="StateMachine/Land" instance=ExtResource("8_1f6af")]
+bus = &"Master"
+
+[node name="UncontrollableCinematic" type="Node" parent="StateMachine"]
+script = ExtResource("14_ocgks")
+default_physics = false
+apply_gravity = false
+handle_movements_input = false
+handle_camera_input = false
+rotate_player_skin = false
+allow_bullet_time = false
+should_play_animation_on_enter = false
+crosshair_texture = SubResource("CompressedTexture2D_s7moa")
+
+[node name="Cinematic" type="Node" parent="StateMachine"]
+script = ExtResource("14_ocgks")

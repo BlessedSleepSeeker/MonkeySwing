@@ -1,0 +1,11 @@
+[gd_resource type="ShaderMaterial" load_steps=2 format=3 uid="uid://o6g37hw578gt"]
+
+[ext_resource type="Shader" uid="uid://clhw1fpbf86v3" path="res://jungle/sky/sky_shader.gdshader" id="1_uc7rb"]
+
+[resource]
+shader = ExtResource("1_uc7rb")
+shader_parameter/energy = 1.0
+shader_parameter/gamma = 1.0
+shader_parameter/scale = Vector3(1, 1, 1)
+shader_parameter/triplanar_blend_power = 4.0
+shader_parameter/seamless_blend = 0.1
