@@ -1,12 +1,16 @@
 extends Node
 class_name StateMachine
 
-signal transitioned(state_name)
 
 @export var initial_state := NodePath()
+## 0 == FPS
+## 1 == TPS
+@export var vision_mode: int = 0
 
 @onready var state: CharacterState = get_node(initial_state)
 
+
+signal transitioned(state_name)
 
 func _ready() -> void:
 	await owner.ready

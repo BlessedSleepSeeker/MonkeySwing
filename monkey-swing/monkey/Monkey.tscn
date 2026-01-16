@@ -1,8 +1,9 @@
-[gd_scene load_steps=20 format=3 uid="uid://ca4dkddej25x"]
+[gd_scene load_steps=24 format=3 uid="uid://ca4dkddej25x"]
 
 [ext_resource type="Script" uid="uid://s1oekavjwvj7" path="res://monkey/monkey.gd" id="1_ivco1"]
 [ext_resource type="PackedScene" uid="uid://dglb4bxycqdhl" path="res://monkey/skin/MonkeySkin.tscn" id="2_jgt8y"]
 [ext_resource type="PackedScene" uid="uid://dfvrcp5lrv2hw" path="res://monkey/camera/MouseFollowCamera.tscn" id="3_ciap6"]
+[ext_resource type="PackedScene" uid="uid://ccav1dvf66qn6" path="res://monkey/camera/FPSCamera.tscn" id="4_6tjul"]
 [ext_resource type="Script" uid="uid://c2s7bjdg4uolq" path="res://monkey/state_machine/state_machine.gd" id="4_sghfs"]
 [ext_resource type="Script" uid="uid://cu44wt5468u5p" path="res://monkey/state_machine/states/idle.gd" id="5_bgwvf"]
 [ext_resource type="Script" uid="uid://limdfqv1yvnx" path="res://monkey/state_machine/states/walk.gd" id="6_6tjul"]
@@ -14,6 +15,8 @@
 [ext_resource type="Script" uid="uid://pdypd0ws2yoi" path="res://monkey/state_machine/states/fall.gd" id="12_lqiej"]
 [ext_resource type="Script" uid="uid://cprj642p3rkie" path="res://monkey/state_machine/states/land.gd" id="13_icq4f"]
 [ext_resource type="Script" uid="uid://cu0ui5bqe7meb" path="res://monkey/state_machine/states/cinematic.gd" id="14_ocgks"]
+[ext_resource type="PackedScene" uid="uid://cs3pvdnb7oxnj" path="res://monkey/hud/MonkeyHUD.tscn" id="15_bgwvf"]
+[ext_resource type="Script" uid="uid://catbky2nqji3r" path="res://monkey/state_machine/states/arm_attached.gd" id="15_c1ut0"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jgt8y"]
 radius = 0.49414063
@@ -35,22 +38,35 @@ script = ExtResource("10_jqkgq")
 FRICTION = 0.0
 metadata/_custom_type_script = "uid://dba7awsrs6b6y"
 
+[sub_resource type="Resource" id="Resource_c1ut0"]
+script = ExtResource("10_jqkgq")
+FRICTION = 0.0
+metadata/_custom_type_script = "uid://bf6dv1jvpucqc"
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s7moa"]
 
-[node name="Monkey" type="CharacterBody3D"]
+[node name="Monkey" type="CharacterBody3D" node_paths=PackedStringArray("active_camera")]
 collision_mask = 7
 script = ExtResource("1_ivco1")
+active_camera = NodePath("FPSCamera")
 
 [node name="MonkeySkin" parent="." instance=ExtResource("2_jgt8y")]
 unique_name_in_owner = true
+visible = false
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.57006836, 0)
 shape = SubResource("CapsuleShape3D_jgt8y")
 
-[node name="MouseFollowCamera" parent="." instance=ExtResource("3_ciap6")]
+[node name="TPSCamera" parent="." instance=ExtResource("3_ciap6")]
 unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7456163, 0.42939997)
+visible = false
+
+[node name="FPSCamera" parent="." instance=ExtResource("4_6tjul")]
+unique_name_in_owner = true
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.9456755, 0.44989127)
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -78,7 +94,6 @@ bus = &"Master"
 
 [node name="Jump" type="Node" parent="StateMachine"]
 script = ExtResource("9_ktmr7")
-update_max_speed_on_enter = true
 physics_parameters = SubResource("Resource_6vh80")
 
 [node name="RandomStreamPlayer" parent="StateMachine/Jump" instance=ExtResource("8_1f6af")]
@@ -105,6 +120,10 @@ script = ExtResource("13_icq4f")
 [node name="RandomStreamPlayer" parent="StateMachine/Land" instance=ExtResource("8_1f6af")]
 bus = &"Master"
 
+[node name="ArmAttached" type="Node" parent="StateMachine"]
+script = ExtResource("15_c1ut0")
+physics_parameters = SubResource("Resource_c1ut0")
+
 [node name="UncontrollableCinematic" type="Node" parent="StateMachine"]
 script = ExtResource("14_ocgks")
 default_physics = false
@@ -118,3 +137,6 @@ crosshair_texture = SubResource("CompressedTexture2D_s7moa")
 
 [node name="Cinematic" type="Node" parent="StateMachine"]
 script = ExtResource("14_ocgks")
+
+[node name="MonkeyHUD" parent="." instance=ExtResource("15_bgwvf")]
+unique_name_in_owner = true

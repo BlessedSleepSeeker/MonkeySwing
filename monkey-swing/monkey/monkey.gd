@@ -1,10 +1,14 @@
 extends CharacterBody3D
 class_name Monkey
 
+@export var active_camera: Node3D
+
 @onready var state_machine: StateMachine = $StateMachine
 @onready var skin: MonkeySkin = %MonkeySkin
-@onready var camera: MouseFollowCamera = $MouseFollowCamera
+@onready var tps_camera: MouseFollowCamera = %TPSCamera
+@onready var fps_camera: FPSCamera = %FPSCamera
 @onready var hitbox: CollisionShape3D = %Hitbox
+@onready var hud: MonkeyHUD = %MonkeyHUD
 #@onready var particles_manager: ParticlesManager = %ParticlesManager
 
 var direction: Vector3 = Vector3.ZERO
@@ -26,7 +30,7 @@ signal velocity_tweened
 func _ready():
 	pass
 	## deactivated for gameplay reason -> add in gameplay/accessibility option
-	#camera.is_colliding.connect(hud_canvas.crosshair_collision)
+	active_camera.is_colliding.connect(hud.tween_crosshair_collision)
 
 func transition_state(state_name: String, msg: Dictionary = {}):
 	state_machine.transition_to(state_name, msg)

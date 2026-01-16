@@ -10,9 +10,14 @@ class_name CameraParameters
 @export var CAMERA_X_ROT_MAX: float = deg_to_rad(70)
 
 ## Unused
-@export var SPRING_ARM_SPEED: float = 2
+@export var SPRING_ARM_SPEED: float = 0.5
 ## Changing lenght allows zooming/unzooming
-@export var SPRING_ARM_LENGHT: float = 8
+@export var SPRING_ARM_MIN_LENGTH: float = 0
+@export var SPRING_ARM_MAX_LENGTH: float = 8
+# allow a state to specify the spring arm lenght on enter
+@export var SPRING_ARM_LENGTH_TICK: float = 1
+@export var SPRING_ARM_ENTER_STATE_SET_VALUE: float = -1
+@export var SPRING_ARM_ZOOM_ALLOWED: bool = true
 @export var CAMERA_FOV: float = 75
 @export var CAMERA_PARAMS_TWEEN_SPEED: float = 2
 

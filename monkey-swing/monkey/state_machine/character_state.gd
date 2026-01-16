@@ -31,9 +31,12 @@ func enter(_msg := {}) -> void:
 	if should_play_animation_on_enter:
 		play_animation()
 	#character.hud_canvas.change_crosshair_to(crosshair_texture)
-	character.camera.parameters = self.camera_parameters
-	character.camera.tween_spring_length(self.camera_parameters.SPRING_ARM_LENGHT, self.camera_parameters.CAMERA_PARAMS_TWEEN_SPEED)
-	character.camera.raycast_range = physics_parameters.GRAPPLE_MAX_RANGE
+	#character.tps_camera.parameters = self.camera_parameters
+	character.fps_camera.parameters = self.camera_parameters
+	# if self.camera_parameters.SPRING_ARM_ENTER_STATE_SET_VALUE != -1:
+	# 	character.tps_camera.tween_spring_length(self.camera_parameters.SPRING_ARM_ENTER_STATE_SET_VALUE, self.camera_parameters.SPRING_ARM_SPEED)
+	#character.tps_camera.raycast_range = physics_parameters.GRAPPLE_MAX_RANGE
+	#character.fps_camera.raycast_range = physics_parameters
 	if character.has_meta("debug_canvas"):
 		character.debug_canvas.set_state(self.name)
 	if update_max_speed_on_enter:
@@ -47,8 +50,8 @@ func input(_event: InputEvent) -> void:
 func unhandled_input(_event: InputEvent) -> void:
 	if handle_movements_input:
 		character.raw_input = Input.get_vector("left", "right", "forward", "back")
-		var forward: Vector3 = character.camera.real_camera.global_basis.z
-		var right: Vector3 = character.camera.real_camera.global_basis.x
+		var forward: Vector3 = character.active_camera.real_camera.global_basis.z
+		var right: Vector3 = character.active_camera.real_camera.global_basis.x
 
 		character.direction = forward * character.raw_input.y + right * character.raw_input.x
 		character.direction.y = 0.0
@@ -61,7 +64,8 @@ func unhandled_input(_event: InputEvent) -> void:
 
 func physics_update(_delta: float, move_character: bool = true) -> void:
 	if handle_camera_input:
-		character.camera.rotate_camera(_delta)
+		#character.tps_camera.rotate_camera(_delta)
+		character.fps_camera.rotate_camera(_delta)
 	
 	if default_physics:
 		## Extracting vertical velocity
@@ -93,11 +97,11 @@ func physics_update(_delta: float, move_character: bool = true) -> void:
 	character.raw_input = Vector2.ZERO
 
 	## character angling
-	if rotate_player_skin:
-		if character.direction.length() > 0.2:
-			character.last_movement_direction = character.direction
-		var target_angle: float = Vector3.BACK.signed_angle_to(character.last_movement_direction, Vector3.UP)
-		character.skin.global_rotation.y = lerp_angle(character.skin.rotation.y, target_angle, physics_parameters.ROTATION_SPEED * _delta)
+	# if rotate_player_skin:
+	# 	if character.direction.length() > 0.2:
+	# 		character.last_movement_direction = character.direction
+	# 	var target_angle: float = Vector3.BACK.signed_angle_to(character.last_movement_direction, Vector3.UP)
+	# 	character.skin.global_rotation.y = lerp_angle(character.skin.rotation.y, target_angle, physics_parameters.ROTATION_SPEED * _delta)
 
 func exit() -> void:
 	pass
@@ -109,7 +113,7 @@ func play_animation(_anim_name: String = "") -> void:
 		character.play_animation(self.name)
 
 func fade_crosshair(direction: bool):
-	pass#character.hud_canvas.fade_crosshair(direction)
+	character.hud.fade_crosshair(direction)
 
 func toggle_bullet_time(toggle: bool) -> void:
 	#print("toggled : %s" % toggle)

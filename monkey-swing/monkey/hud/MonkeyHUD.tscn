@@ -1,0 +1,48 @@
+[gd_scene load_steps=5 format=3 uid="uid://cs3pvdnb7oxnj"]
+
+[ext_resource type="Script" uid="uid://cd2123cgv2a0w" path="res://monkey/hud/monkey_hud.gd" id="1_w84u1"]
+[ext_resource type="Theme" uid="uid://bq5hocxdnvk53" path="res://monkey/hud/player_theme.tres" id="2_6vrms"]
+[ext_resource type="Texture2D" uid="uid://drjgnp2l4ddep" path="res://monkey/hud/assets/crosshairs/crosshair001.png" id="3_guf28"]
+[ext_resource type="Texture2D" uid="uid://dk8gye8x8o5m6" path="res://monkey/hud/assets/crosshairs/crosshair008.png" id="4_7dqgr"]
+
+[node name="MonkeyHud" type="CanvasLayer"]
+script = ExtResource("1_w84u1")
+
+[node name="BulletTimeVisual" type="ColorRect" parent="."]
+unique_name_in_owner = true
+modulate = Color(1, 1, 1, 0)
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme = ExtResource("2_6vrms")
+
+[node name="CrosshairContainer" type="CenterContainer" parent="MarginContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CrosshairCenter" type="TextureRect" parent="MarginContainer/CrosshairContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("3_guf28")
+
+[node name="CrosshairCollision" type="TextureRect" parent="MarginContainer/CrosshairContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+texture = ExtResource("4_7dqgr")
+
+[node name="CrosshairArmLeft" type="TextureRect" parent="MarginContainer/CrosshairContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+
+[node name="CrosshairArmRight" type="TextureRect" parent="MarginContainer/CrosshairContainer"]
+unique_name_in_owner = true
+layout_mode = 2

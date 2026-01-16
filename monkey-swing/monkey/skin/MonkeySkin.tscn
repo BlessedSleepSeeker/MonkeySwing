@@ -85,13 +85,7 @@ script = ExtResource("1_7vvqd")
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
 
 [node name="Skeleton3D" parent="Capuchin/body" index="0"]
-bones/0/rotation = Quaternion(-0.19509035, 0, 0, 0.98078537)
-bones/2/rotation = Quaternion(0.8629455, 0, 0, 0.50529706)
-bones/4/rotation = Quaternion(0.85419834, 0, 0, 0.5199473)
-bones/7/rotation = Quaternion(-0.8013706, 0, 0, 0.59816825)
-bones/9/rotation = Quaternion(-0.8506355, 0, 0, 0.5257559)
-bones/11/rotation = Quaternion(0.6433137, 0, 0, 0.7656028)
-bones/12/rotation = Quaternion(-0.11700254, 0, 0, 0.99313164)
+bones/12/rotation = Quaternion(0, 0, -0.35990876, 0.9329875)
 
 [node name="AnimationTree" type="AnimationTree" parent="."]
 unique_name_in_owner = true
