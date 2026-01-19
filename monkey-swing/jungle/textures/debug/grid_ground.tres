@@ -1,0 +1,8 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://dt3ebx343rraa"]
+
+[ext_resource type="Texture2D" uid="uid://bvx3rbjwddrtm" path="res://jungle/textures/debug/PNG/Dark/texture_13.png" id="1_npm0o"]
+
+[resource]
+albedo_texture = ExtResource("1_npm0o")
+uv1_triplanar = true
+uv2_triplanar = true

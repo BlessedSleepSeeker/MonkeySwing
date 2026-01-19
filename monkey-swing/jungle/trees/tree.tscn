@@ -1,0 +1,72 @@
+[gd_scene load_steps=5 format=3 uid="uid://ddlos6467o8vn"]
+
+[ext_resource type="Script" uid="uid://tkubi1bjsa02" path="res://jungle/trees/tree.gd" id="1_j4kkl"]
+[ext_resource type="Material" path="res://jungle/textures/wood/wood.tres" id="1_m3fkd"]
+[ext_resource type="Material" uid="uid://lnmr3j5jap5w" path="res://jungle/textures/jungle_floor.tres" id="2_j4kkl"]
+[ext_resource type="PackedScene" uid="uid://c4b88mpgi2rgn" path="res://jungle/collectibles/Banana.tscn" id="4_xfbj0"]
+
+[node name="Tree" type="Node3D"]
+script = ExtResource("1_j4kkl")
+
+[node name="Trunk" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("1_m3fkd")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Trunk"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 8.328, 0)
+height = 16.79715
+sides = 6
+
+[node name="Branchs" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("1_m3fkd")
+use_collision = true
+collision_layer = 6
+collision_mask = 0
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Branchs"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, -2.0427809, 10.82543, -0.032144547)
+radius = 0.3
+height = 3.4787598
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Branchs"]
+transform = Transform3D(-3.3683122e-08, -0.77058, 0.6373433, 1, -4.371139e-08, 0, 2.785916e-08, 0.6373433, 0.77058, 1.787143, 12.937529, -1.3930222)
+radius = 0.3
+height = 3.9822998
+
+[node name="CSGCylinder3D7" type="CSGCylinder3D" parent="Branchs"]
+transform = Transform3D(-4.3463324e-08, -0.994325, 0.10638556, 1, -4.371139e-08, 0, 4.650259e-09, 0.10638556, 0.994325, 1.9028327, 7.061685, -0.22920766)
+radius = 0.3
+height = 3.7868347
+
+[node name="CSGCylinder3D4" type="CSGCylinder3D" parent="Branchs"]
+transform = Transform3D(-3.3683122e-08, -0.5962949, -0.8027655, 1, 2.2792968e-09, -4.3651923e-08, 2.785916e-08, -0.8027655, 0.5962949, 1.0859431, 15.192107, 1.602927)
+radius = 0.25
+height = 3.158081
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="Branchs"]
+transform = Transform3D(-3.3683122e-08, -0.5962949, -0.8027655, 1, 2.2792968e-09, -4.3651923e-08, 2.785916e-08, -0.8027655, 0.5962949, 0.84808415, 8.812145, 1.2827075)
+radius = 0.25
+height = 2.3602905
+
+[node name="CSGCylinder3D6" type="CSGCylinder3D" parent="Branchs"]
+transform = Transform3D(-2.3249491e-08, -0.8179288, -0.5753194, 1, 2.2792968e-09, -4.3651923e-08, 3.701549e-08, -0.5753194, 0.8179288, -1.3638818, 7.0209265, -0.63788795)
+radius = 0.25
+height = 2.3602905
+
+[node name="Top" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("2_j4kkl")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="TopCylinder" type="CSGCylinder3D" parent="Top"]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 16.841766, 0)
+radius = 6.5253906
+height = 0.5571289
+sides = 6
+
+[node name="Banana" parent="." instance=ExtResource("4_xfbj0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 18.020975, 0)

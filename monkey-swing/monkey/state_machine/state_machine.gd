@@ -25,10 +25,8 @@ func _input(event: InputEvent) -> void:
 func _unhandled_input(event: InputEvent) -> void:
 	state.unhandled_input(event)
 
-
 func _process(delta: float) -> void:
 	state.update(delta)
-
 
 func _physics_process(delta: float) -> void:
 	state.physics_update(delta)
@@ -44,3 +42,9 @@ func transition_to(target_state_name: String, msg: Dictionary = {}) -> void:
 	#print("entering %s" % target_state_name)
 	state.enter(msg)
 	transitioned.emit(state.name)
+
+func get_state_by_name(target_state_name: String) -> State:
+	if not has_node(target_state_name):
+		push_error("No State with Name {%s} was found" % [target_state_name])
+		return null
+	return get_node(target_state_name)

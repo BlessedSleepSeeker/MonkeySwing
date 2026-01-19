@@ -118,18 +118,23 @@ func fade_crosshair(direction: bool):
 func toggle_bullet_time(toggle: bool) -> void:
 	#print("toggled : %s" % toggle)
 	if toggle:
-		if character.bullet_time_cooldown.is_stopped():
-			character.bullet_time_on = true
-			character.bullet_time_stopwatch.pause = false
-			character.hud_canvas.tween_bullet_time(0, 1, physics_parameters.BULLET_TIME_TRANSITION_SPEED)
-			var tween: Tween = get_tree().create_tween()
-			tween.tween_property(Engine, "time_scale", physics_parameters.BULLET_TIME_STRENGHT, physics_parameters.BULLET_TIME_TRANSITION_SPEED).set_trans(Tween.TRANS_CUBIC)
-	else:
-		if character.bullet_time_stopwatch.current_time > 0.0:
-			character.bullet_time_on = false
-			character.bullet_time_cooldown.wait_time = max(character.bullet_time_stopwatch.current_time, physics_parameters.BULLET_TIME_TRANSITION_SPEED)
-			character.bullet_time_cooldown.start()
-			character.bullet_time_stopwatch.reset()
-			character.hud_canvas.tween_bullet_time(1, 1, character.bullet_time_cooldown.wait_time)
-			var tween: Tween = get_tree().create_tween()
-			tween.tween_property(Engine, "time_scale", 1, physics_parameters.BULLET_TIME_TRANSITION_SPEED).set_trans(Tween.TRANS_CUBIC)
+		pass
+	# 	if character.bullet_time_cooldown.is_stopped():
+	# 		character.bullet_time_on = true
+	# 		character.bullet_time_stopwatch.pause = false
+	# 		character.hud_canvas.tween_bullet_time(0, 1, physics_parameters.BULLET_TIME_TRANSITION_SPEED)
+	# 		var tween: Tween = get_tree().create_tween()
+	# 		tween.tween_property(Engine, "time_scale", physics_parameters.BULLET_TIME_STRENGHT, physics_parameters.BULLET_TIME_TRANSITION_SPEED).set_trans(Tween.TRANS_CUBIC)
+	# else:
+	# 	if character.bullet_time_stopwatch.current_time > 0.0:
+	# 		character.bullet_time_on = false
+	# 		character.bullet_time_cooldown.wait_time = max(character.bullet_time_stopwatch.current_time, physics_parameters.BULLET_TIME_TRANSITION_SPEED)
+	# 		character.bullet_time_cooldown.start()
+	# 		character.bullet_time_stopwatch.reset()
+	# 		character.hud_canvas.tween_bullet_time(1, 1, character.bullet_time_cooldown.wait_time)
+	# 		var tween: Tween = get_tree().create_tween()
+	# 		tween.tween_property(Engine, "time_scale", 1, physics_parameters.BULLET_TIME_TRANSITION_SPEED).set_trans(Tween.TRANS_CUBIC)
+
+## axis - (number - axis)
+static func inverse_number_around_another(number: float, axis: float) -> float:
+	return axis - (number - axis)

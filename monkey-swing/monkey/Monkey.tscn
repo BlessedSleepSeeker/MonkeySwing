@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://ca4dkddej25x"]
+[gd_scene load_steps=42 format=3 uid="uid://ca4dkddej25x"]
 
 [ext_resource type="Script" uid="uid://s1oekavjwvj7" path="res://monkey/monkey.gd" id="1_ivco1"]
 [ext_resource type="PackedScene" uid="uid://dglb4bxycqdhl" path="res://monkey/skin/MonkeySkin.tscn" id="2_jgt8y"]
@@ -11,12 +11,27 @@
 [ext_resource type="PackedScene" uid="uid://co75xjj6oudb4" path="res://sounds/utils/random_stream_player.tscn" id="8_1f6af"]
 [ext_resource type="Script" uid="uid://dlvacdf1noi48" path="res://monkey/state_machine/states/jump.gd" id="9_ktmr7"]
 [ext_resource type="Script" uid="uid://bf6dv1jvpucqc" path="res://monkey/physics/character_physics.gd" id="10_jqkgq"]
+[ext_resource type="AudioStream" uid="uid://c4mllq1rx1vfn" path="res://sounds/sfx/steps/footstep_wood_000.ogg" id="10_lqiej"]
 [ext_resource type="Script" uid="uid://2yki1u1wwicx" path="res://monkey/state_machine/states/double_jump.gd" id="11_fxt3k"]
+[ext_resource type="AudioStream" uid="uid://qmakv5h80pvn" path="res://sounds/sfx/steps/footstep_wood_001.ogg" id="11_icq4f"]
 [ext_resource type="Script" uid="uid://pdypd0ws2yoi" path="res://monkey/state_machine/states/fall.gd" id="12_lqiej"]
+[ext_resource type="AudioStream" uid="uid://c7wufnhlsyohx" path="res://sounds/sfx/steps/footstep_wood_002.ogg" id="12_ocgks"]
+[ext_resource type="AudioStream" uid="uid://bpcwn4v4d0dgn" path="res://sounds/sfx/steps/footstep_wood_003.ogg" id="13_6vh80"]
 [ext_resource type="Script" uid="uid://cprj642p3rkie" path="res://monkey/state_machine/states/land.gd" id="13_icq4f"]
 [ext_resource type="Script" uid="uid://cu0ui5bqe7meb" path="res://monkey/state_machine/states/cinematic.gd" id="14_ocgks"]
+[ext_resource type="AudioStream" uid="uid://c4el6dmigkp4o" path="res://sounds/sfx/steps/footstep_wood_004.ogg" id="14_t4ejd"]
 [ext_resource type="PackedScene" uid="uid://cs3pvdnb7oxnj" path="res://monkey/hud/MonkeyHUD.tscn" id="15_bgwvf"]
 [ext_resource type="Script" uid="uid://catbky2nqji3r" path="res://monkey/state_machine/states/arm_attached.gd" id="15_c1ut0"]
+[ext_resource type="AudioStream" uid="uid://d4dy56ncr3ceu" path="res://sounds/sfx/swinging/woosh1.ogg" id="21_yg7sb"]
+[ext_resource type="AudioStream" uid="uid://cgyuvjp0sfm7p" path="res://sounds/sfx/swinging/woosh2.ogg" id="22_qor3x"]
+[ext_resource type="AudioStream" uid="uid://o60bqqeo4voi" path="res://sounds/sfx/swinging/woosh3.ogg" id="23_l2s1s"]
+[ext_resource type="AudioStream" uid="uid://d3p8jqalk1dwp" path="res://sounds/sfx/swinging/woosh4.ogg" id="24_te4x1"]
+[ext_resource type="AudioStream" uid="uid://c10udp60nafpe" path="res://sounds/sfx/swinging/woosh5.ogg" id="25_orbq4"]
+[ext_resource type="AudioStream" uid="uid://33umqnolpk42" path="res://sounds/sfx/swinging/woosh6.ogg" id="26_kb67s"]
+[ext_resource type="AudioStream" uid="uid://dxb3vnhaofuj3" path="res://sounds/sfx/swinging/woosh7.ogg" id="27_byvp4"]
+[ext_resource type="AudioStream" uid="uid://b0natn0coeyhy" path="res://sounds/sfx/swinging/woosh8.ogg" id="28_hpsm2"]
+[ext_resource type="Script" uid="uid://cx184q2tbvcin" path="res://monkey/state_machine/states/slide.gd" id="29_l2s1s"]
+[ext_resource type="Script" uid="uid://ci55vebqfn05b" path="res://monkey/state_machine/states/climb.gd" id="29_qor3x"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jgt8y"]
 radius = 0.49414063
@@ -43,6 +58,23 @@ script = ExtResource("10_jqkgq")
 FRICTION = 0.0
 metadata/_custom_type_script = "uid://bf6dv1jvpucqc"
 
+[sub_resource type="Resource" id="Resource_te4x1"]
+script = ExtResource("10_jqkgq")
+GRAVITY = 0.0
+MAX_SPEED = 4.0
+FRICTION = 10.0
+metadata/_custom_type_script = "uid://bf6dv1jvpucqc"
+
+[sub_resource type="Curve" id="Curve_qor3x"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(1, 0), -3.5166616, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="Resource" id="Resource_l2s1s"]
+script = ExtResource("10_jqkgq")
+MAX_SPEED = 2.0
+FRICTION = 0.0
+metadata/_custom_type_script = "uid://bf6dv1jvpucqc"
+
 [sub_resource type="CompressedTexture2D" id="CompressedTexture2D_s7moa"]
 
 [node name="Monkey" type="CharacterBody3D" node_paths=PackedStringArray("active_camera")]
@@ -66,7 +98,7 @@ visible = false
 
 [node name="FPSCamera" parent="." instance=ExtResource("4_6tjul")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.9456755, 0.44989127)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.9456755, 0.273063)
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -88,7 +120,12 @@ script = ExtResource("6_6tjul")
 script = ExtResource("7_c1ut0")
 
 [node name="RandomStreamPlayer" parent="StateMachine/Run" instance=ExtResource("8_1f6af")]
-bus = &"Master"
+bus = &"SFX"
+streams = Array[AudioStream]([ExtResource("10_lqiej"), ExtResource("11_icq4f"), ExtResource("12_ocgks"), ExtResource("13_6vh80"), ExtResource("14_t4ejd")])
+
+[node name="RandomStreamPlayer2" parent="StateMachine/Run" instance=ExtResource("8_1f6af")]
+bus = &"SFX"
+streams = Array[AudioStream]([ExtResource("10_lqiej"), ExtResource("11_icq4f"), ExtResource("12_ocgks"), ExtResource("13_6vh80"), ExtResource("14_t4ejd")])
 
 [node name="AnimationLoopingTimer" type="Timer" parent="StateMachine/Run"]
 
@@ -97,7 +134,7 @@ script = ExtResource("9_ktmr7")
 physics_parameters = SubResource("Resource_6vh80")
 
 [node name="RandomStreamPlayer" parent="StateMachine/Jump" instance=ExtResource("8_1f6af")]
-bus = &"Master"
+bus = &"SFX"
 no_repeat = false
 
 [node name="DoubleJump" type="Node" parent="StateMachine"]
@@ -106,7 +143,7 @@ update_max_speed_on_enter = true
 physics_parameters = SubResource("Resource_t4ejd")
 
 [node name="RandomStreamPlayer" parent="StateMachine/DoubleJump" instance=ExtResource("8_1f6af")]
-bus = &"Master"
+bus = &"SFX"
 no_repeat = false
 
 [node name="Fall" type="Node" parent="StateMachine"]
@@ -118,11 +155,27 @@ physics_parameters = SubResource("Resource_1kvii")
 script = ExtResource("13_icq4f")
 
 [node name="RandomStreamPlayer" parent="StateMachine/Land" instance=ExtResource("8_1f6af")]
-bus = &"Master"
+bus = &"SFX"
 
 [node name="ArmAttached" type="Node" parent="StateMachine"]
 script = ExtResource("15_c1ut0")
 physics_parameters = SubResource("Resource_c1ut0")
+
+[node name="RandomStreamPlayer" parent="StateMachine/ArmAttached" instance=ExtResource("8_1f6af")]
+bus = &"SFX"
+streams = Array[AudioStream]([ExtResource("21_yg7sb"), ExtResource("22_qor3x"), ExtResource("23_l2s1s"), ExtResource("24_te4x1"), ExtResource("25_orbq4"), ExtResource("26_kb67s"), ExtResource("27_byvp4"), ExtResource("28_hpsm2")])
+
+[node name="Slide" type="Node" parent="StateMachine"]
+script = ExtResource("29_l2s1s")
+physics_parameters = SubResource("Resource_te4x1")
+
+[node name="RandomStreamPlayer" parent="StateMachine/Slide" instance=ExtResource("8_1f6af")]
+bus = &"SFX"
+
+[node name="Climb" type="Node" parent="StateMachine"]
+script = ExtResource("29_qor3x")
+speed_decrease_curve = SubResource("Curve_qor3x")
+physics_parameters = SubResource("Resource_l2s1s")
 
 [node name="UncontrollableCinematic" type="Node" parent="StateMachine"]
 script = ExtResource("14_ocgks")

@@ -51,6 +51,7 @@ func rotate_camera(_delta) -> void:
 		character.rotation.y -= self._camera_input_direction.x * (_delta * 5) 
 	else:
 		character.rotation.y -= self._camera_input_direction.x * _delta
+	
 	character.rotation.y = wrapf(character.rotation.y, 0.0, deg_to_rad(360))
 	self._camera_input_direction = Vector2.ZERO
 

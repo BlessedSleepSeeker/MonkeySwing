@@ -28,6 +28,8 @@ func unhandled_input(_event: InputEvent):
 func physics_update(_delta: float, _move_character: bool = true) -> void:
 	super(_delta)
 	frame_count += 1
+	if character.is_on_wall() && not character.is_on_floor() && character.current_stamina > 1:
+		state_machine.transition_to("Slide")
 	if character.is_on_floor():
 		state_machine.transition_to("Land")
 

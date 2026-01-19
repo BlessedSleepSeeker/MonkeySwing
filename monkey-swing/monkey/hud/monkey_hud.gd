@@ -7,6 +7,10 @@ class_name MonkeyHUD
 @export var crosshair_base_color: Color = Color("ffffff")
 @export var crosshair_color_on_colliding: Color = Color("70ff7c")
 
+@export_group("Hands")
+@export var hand_try_texture: Texture2D = preload("res://monkey/hud/assets/hands/hand.png")
+@export var hand_grab_texture: Texture2D = preload("res://monkey/hud/assets/hands/revolt.png")
+
 @export_group("Settings")
 @export var base_indicator_size: int = 48
 
@@ -21,11 +25,14 @@ class_name MonkeyHUD
 
 @onready var bullet_time_screen_fx: ColorRect = %BulletTimeVFX
 
+@onready var stamina_bar: ProgressBar = %StaminaBar
 
 #region Settings
 func _ready():
 	#settings.settings_changed.connect(apply_settings)
 	apply_settings()
+	crosshair_arm_right.modulate.a = 0
+	crosshair_arm_left.modulate.a = 0
 
 func apply_settings() -> void:
 	set_crosshair_size()
@@ -95,6 +102,31 @@ func tween_bullet_time(wanted_time: float, max_time: float, tween_speed: float):
 	# var tween3: Tween = create_tween()
 	# tween3.tween_property(bullet_time_screen_fx, "modulate:a", inverse_number_around_another(percent, 0.5), tween_speed)
 
+# func _unhandled_input(_event):
+# 	if Input.is_action_just_pressed("use_left_arm"):
+# 		tween_hand(false, "Try")
+# 	if Input.is_action_just_released("use_left_arm"):
+# 		tween_hand(false, "Hide")
+
+# 	if Input.is_action_just_pressed("use_right_arm"):
+# 		tween_hand(true, "Try")
+# 	if Input.is_action_just_released("use_right_arm"):
+# 		tween_hand(true, "Hide")
+
+func tween_hand(side: bool, mode: String) -> void:
+	var affected_texture: TextureRect = crosshair_arm_right if side else crosshair_arm_left
+	match mode:
+		"Hide":
+			affected_texture.modulate.a = 0
+		"Try":
+			affected_texture.texture = hand_try_texture
+			affected_texture.modulate.a = 1
+		"Used":
+			affected_texture.texture = hand_grab_texture
+			affected_texture.modulate.a = 1
+
+func set_stamina_value(stamina_value: float, stamina_max: float) -> void:
+	stamina_bar.value = (stamina_value / stamina_max) * 100
 
 static func inverse_number_around_another(number: float, axis: float) -> float:
 	return axis - (number - axis)

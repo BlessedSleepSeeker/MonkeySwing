@@ -3,7 +3,10 @@ class_name RunState
 
 @export var walk_treshold: float = 0.4
 
+@export var rdm_stream_delay: float = 0.1
+
 @onready var rdm_stream_player: RandomStreamPlayer = $RandomStreamPlayer
+@onready var rdm_stream_player2: RandomStreamPlayer = $RandomStreamPlayer2
 @onready var animation_looping_timer: Timer = $AnimationLoopingTimer
 
 func enter(_msg := {}) -> void:
@@ -18,12 +21,17 @@ func unhandled_input(_event: InputEvent):
 
 func loop_sound():
 	rdm_stream_player.play_random()
+	await get_tree().create_timer(rdm_stream_delay).timeout
+	rdm_stream_player2.play_random()
 	animation_looping_timer.wait_time = anim_duration / 2
 	animation_looping_timer.timeout.connect(play_sound)
 	animation_looping_timer.start()
+	
 
 func play_sound() -> void:
 	rdm_stream_player.play_random()
+	await get_tree().create_timer(rdm_stream_delay).timeout
+	rdm_stream_player2.play_random()
 
 func physics_update(_delta: float, _move_character: bool = true) -> void:
 	super(_delta)

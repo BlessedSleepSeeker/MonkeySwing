@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbbfa6dbexv0r"]
+
+[ext_resource type="PackedScene" uid="uid://dykk7260ep2cf" path="res://monkey/skin/model/hand/CapuchinLeftHand.gltf" id="1_ch3c1"]
+
+[node name="LeftHandMesh" type="Node3D"]
+
+[node name="blockbench_export" parent="." instance=ExtResource("1_ch3c1")]
+transform = Transform3D(6, 0, 0, 0, -2.6226832e-07, 6, 0, -6, -2.6226832e-07, 0, 0.13523223, 0)

@@ -1,0 +1,316 @@
+[gd_scene load_steps=10 format=3 uid="uid://dy3j8mf7p21o1"]
+
+[ext_resource type="PackedScene" uid="uid://ca4dkddej25x" path="res://monkey/Monkey.tscn" id="1_2v20k"]
+[ext_resource type="Script" uid="uid://bbyf7emrft17v" path="res://jungle/jungle.gd" id="1_ajwnh"]
+[ext_resource type="Material" uid="uid://brmr1j4n0cpvr" path="res://jungle/textures/stylized_grass/stylized_grasstres.tres" id="2_kojqe"]
+[ext_resource type="Material" path="res://jungle/textures/rock/rock.tres" id="3_ajwnh"]
+[ext_resource type="PackedScene" uid="uid://ddlos6467o8vn" path="res://jungle/trees/tree.tscn" id="5_iqtul"]
+[ext_resource type="PackedScene" uid="uid://c4b88mpgi2rgn" path="res://jungle/collectibles/Banana.tscn" id="6_ajwnh"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_ajwnh"]
+sky_top_color = Color(0.23000002, 0.5636667, 1, 1)
+sky_horizon_color = Color(0.86, 0.18059999, 0.7127966, 1)
+sky_curve = 0.42426416
+ground_bottom_color = Color(0.1539, 0.81, 0.186705, 1)
+ground_horizon_color = Color(0.86, 0.18059999, 0.7127966, 1)
+ground_curve = 0.25992045
+
+[sub_resource type="Sky" id="Sky_4ldcj"]
+sky_material = SubResource("ProceduralSkyMaterial_ajwnh")
+
+[sub_resource type="Environment" id="Environment_iqtul"]
+background_mode = 2
+sky = SubResource("Sky_4ldcj")
+
+[node name="JungleLevelTest" type="Node3D"]
+script = ExtResource("1_ajwnh")
+
+[node name="Monkey" parent="." instance=ExtResource("1_2v20k")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.2914333, 0.8160982, -8.509623)
+
+[node name="Grounds" type="Node3D" parent="."]
+
+[node name="Ground" type="CSGCombiner3D" parent="Grounds"]
+material_override = ExtResource("2_kojqe")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Grounds/Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 31.173645)
+size = Vector3(400, 1, 400)
+
+[node name="Rock" type="CSGCombiner3D" parent="Grounds"]
+material_override = ExtResource("3_ajwnh")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Grounds/Rock"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.871, 0)
+size = Vector3(4.5336304, 3.0020752, 3.7616272)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Grounds/Rock"]
+transform = Transform3D(0.5641891, 0, -0.8256456, 0, 1, 0, 0.8256456, 0, 0.5641891, -1.5090073, 0.819, 1.3693999)
+size = Vector3(3.1631927, 2.828186, 3.0097198)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Grounds/Rock"]
+transform = Transform3D(0.8847681, 0, -0.46603152, 0, 1, 0, 0.46603152, 0, 0.8847681, -0.32433367, 0.424, 1.9575016)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Grounds/Rock"]
+transform = Transform3D(0.9828163, -0.10201684, 0.153833, 4.1269306e-08, 0.8333942, 0.552679, -0.18458608, -0.54318196, 0.8190735, -0.28053308, 0.3908682, -1.7448684)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="Rock2" type="CSGCombiner3D" parent="Grounds"]
+transform = Transform3D(0.5559765, 0, 0.831198, 0, 1, 0, -0.831198, 0, 0.5559765, 11.971621, 0, 8.22521)
+material_override = ExtResource("3_ajwnh")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Grounds/Rock2"]
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 0, 3.166929, 0)
+size = Vector3(4.5336304, 5.593933, 3.7616272)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Grounds/Rock2"]
+transform = Transform3D(0.5641905, 0, -0.82564855, 0, 1, 0, 0.82564855, 0, 0.5641905, -1.509007, 1.250076, 1.3693981)
+size = Vector3(3.1631927, 3.6903381, 3.0097198)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Grounds/Rock2"]
+transform = Transform3D(0.8847681, 0, -0.46603152, 0, 1, 0, 0.46603152, 0, 0.8847681, -0.32433367, 0.424, 1.9575016)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Grounds/Rock2"]
+transform = Transform3D(0.98281646, -0.10201685, 0.153833, 4.1269306e-08, 0.8333942, 0.552679, -0.18458599, -0.5431821, 0.8190737, -0.626112, 0.4300363, -1.9800158)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="Rock3" type="CSGCombiner3D" parent="Grounds"]
+transform = Transform3D(0.67706865, 0, -0.73591995, 0, 1, 0, 0.73591995, 0, 0.67706865, 8.495256, 0, -15.58962)
+material_override = ExtResource("3_ajwnh")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Grounds/Rock3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.9525888, 0)
+size = Vector3(4.5336304, 7.1652527, 3.7616272)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Grounds/Rock3"]
+transform = Transform3D(0.56418914, 0, -0.8256457, 0, 1, 0, 0.8256457, 0, 0.56418914, -1.5090075, 2.2495496, 1.3694)
+size = Vector3(3.1631927, 5.6892853, 3.0097198)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Grounds/Rock3"]
+transform = Transform3D(0.8847692, 0, -0.4660319, 0, 1, 0, 0.4660319, 0, 0.8847692, -0.3243332, 1.2308218, 1.9575014)
+size = Vector3(3.1631927, 3.6517372, 3.0097198)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Grounds/Rock3"]
+transform = Transform3D(0.95584947, -0.16240855, 0.24489868, 1.2875996e-07, 0.8333942, 0.55267894, -0.293857, -0.528278, 0.79659957, -0.21642208, 0.3835305, -1.4945602)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="Rock4" type="CSGCombiner3D" parent="Grounds"]
+transform = Transform3D(0.96495694, 0, -0.26240826, 0, 1, 0, 0.26240826, 0, 0.96495694, -8.177693, 0.0324111, -43.488976)
+material_override = ExtResource("3_ajwnh")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Grounds/Rock4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.279431, 0)
+size = Vector3(4.5336304, 13.818935, 3.7616272)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Grounds/Rock4"]
+transform = Transform3D(0.56418914, 0, -0.8256457, 0, 1, 0, 0.8256457, 0, 0.56418914, -1.5090055, 3.8572576, 1.3694)
+size = Vector3(3.1631927, 8.904701, 3.0097198)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Grounds/Rock4"]
+transform = Transform3D(0.8847692, 0, -0.4660319, 0, 1, 0, 0.4660319, 0, 0.8847692, -0.3243332, 1.2308218, 1.9575014)
+size = Vector3(3.1631927, 3.6517372, 3.0097198)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Grounds/Rock4"]
+transform = Transform3D(0.95584947, -0.16240855, 0.24489868, 1.2875996e-07, 0.8333942, 0.55267894, -0.293857, -0.528278, 0.79659957, -0.21642208, 0.3835305, -1.4945602)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="Rock6" type="CSGCombiner3D" parent="Grounds"]
+transform = Transform3D(0.96495694, 0, -0.26240826, 0, 1, 0, 0.26240826, 0, 0.96495694, -15.72038, 0.0324111, -45.540115)
+material_override = ExtResource("3_ajwnh")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Grounds/Rock6"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.7219853, 0.2961235)
+size = Vector3(4.5336304, 10.713667, 3.1693878)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Grounds/Rock6"]
+transform = Transform3D(0.56418914, 0, -0.8256457, 0, 1, 0, 0.8256457, 0, 0.56418914, -1.7211475, 3.2009676, 1.0589714)
+size = Vector3(2.4111862, 7.592121, 3.0097198)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Grounds/Rock6"]
+transform = Transform3D(0.8847692, 0, -0.4660319, 0, 1, 0, 0.4660319, 0, 0.8847692, -0.3243332, 0.9677899, 1.9575043)
+size = Vector3(3.1631927, 3.1256733, 3.0097198)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Grounds/Rock6"]
+transform = Transform3D(0.9289674, -0.16240855, 0.33263052, -0.051339306, 0.8333942, 0.5502893, -0.36658412, -0.528278, 0.7658583, -0.21642208, 0.3835305, -1.4945602)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="Rock5" type="CSGCombiner3D" parent="Grounds"]
+transform = Transform3D(0.46385264, 0, -0.88591236, 0, 1, 0, 0.88591236, 0, 0.46385264, -11.006327, -2.846373, -50.293507)
+material_override = ExtResource("3_ajwnh")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Grounds/Rock5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 7.279431, 0)
+size = Vector3(4.5336304, 13.818935, 3.7616272)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Grounds/Rock5"]
+transform = Transform3D(0.56418914, 0, -0.8256457, 0, 1, 0, 0.8256457, 0, 0.56418914, -1.5090055, 3.8572576, 1.3694)
+size = Vector3(3.1631927, 8.904701, 3.0097198)
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Grounds/Rock5"]
+transform = Transform3D(0.8847692, 0, -0.4660319, 0, 1, 0, 0.4660319, 0, 0.8847692, -0.3243332, 1.2308218, 1.9575014)
+size = Vector3(3.1631927, 3.6517372, 3.0097198)
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Grounds/Rock5"]
+transform = Transform3D(0.95584947, -0.16240855, 0.24489868, 1.2875996e-07, 0.8333942, 0.55267894, -0.293857, -0.528278, 0.79659957, -0.21642208, 0.3835305, -1.4945602)
+size = Vector3(3.1631927, 2.0380936, 3.0097198)
+
+[node name="Rock7" type="CSGCombiner3D" parent="Grounds"]
+transform = Transform3D(-0.7384436, 0, -0.6743152, 0, 1, 0, 0.6743152, 0, -0.7384436, 0.6359348, -2.846373, -44.976425)
+material_override = ExtResource("3_ajwnh")
+use_collision = true
+collision_layer = 2
+collision_mask = 0
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Grounds/Rock7"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10.603445, 0)
+size = Vector3(4.5336304, 20.466963, 3.7616272)
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Grounds/Rock7"]
+transform = Transform3D(0.5641891, 0, -0.82564574, 0, 1, 0, 0.82564574, 0, 0.5641891, -1.5090065, 2.5055437, 1.3694)
+size = Vector3(3.1631927, 6.201273, 3.0097198)
+
+[node name="Trees" type="Node3D" parent="."]
+
+[node name="Tree" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.058998, 0, -6.2433167)
+randomize_rotation = false
+
+[node name="Tree2" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.058998, 0, -13.750613)
+randomize_rotation = false
+
+[node name="Tree3" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.058998, 0, -21.301601)
+randomize_rotation = false
+
+[node name="Tree4" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.058998, 0, -28.808899)
+randomize_rotation = false
+
+[node name="Tree9" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.007155759, 0, 0.99997437, 0, 1, 0, -0.99997437, 0, -0.007155759, 6.9972086, 0, -26.152851)
+randomize_rotation = false
+
+[node name="Tree10" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.28252566, 0, 0.95925975, 0, 1, 0, -0.95925975, 0, 0.28252566, 13.078892, 0, -21.424454)
+randomize_rotation = false
+
+[node name="Tree11" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.5417522, 0, 0.8405382, 0, 1, 0, -0.8405382, 0, 0.5417522, 14.648643, 0, -15.011835)
+randomize_rotation = false
+
+[node name="Tree12" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.99985003, 0, 0.017312825, 0, 1, 0, -0.017312825, 0, 0.99985003, 16.303377, 0, -9.375368)
+randomize_rotation = false
+
+[node name="Tree13" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.84562534, 0, -0.5337768, 0, 1, 0, 0.5337768, 0, 0.84562534, 13.565663, 0, -5.0382004)
+randomize_rotation = false
+
+[node name="Tree14" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.620272, 0, -0.7843867, 0, 1, 0, 0.7843867, 0, 0.620272, 8.626828, 0, -3.3579166)
+randomize_rotation = false
+
+[node name="Tree15" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.3563303, 0, -0.93436, 0, 1, 0, 0.93436, 0, -0.3563303, 4.282162, 0, -5.0148115)
+randomize_rotation = false
+
+[node name="Tree16" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.3563303, 0, -0.93436, 0, 1, 0, 0.93436, 0, -0.3563303, 8.342937, 7.4884176, -15.6628685)
+randomize_rotation = false
+
+[node name="Tree5" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.9691879, 0, -0.24632245, 0, 1, 0, 0.24632245, 0, 0.9691879, 1.2826468, 0, -35.4241)
+randomize_rotation = false
+
+[node name="Tree6" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.8862197, 0, -0.4632651, 0, 1, 0, 0.4632651, 0, 0.8862197, 3.6895423, 0, -41.661583)
+randomize_rotation = false
+
+[node name="Tree7" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.7190973, 0, -0.6949094, 0, 1, 0, 0.6949094, 0, 0.7190973, 7.4656825, 0, -46.30772)
+randomize_rotation = false
+
+[node name="Tree8" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.15634823, 0, -0.987702, 0, 1, 0, 0.987702, 0, -0.15634823, 20.6315, 0, -49.84458)
+randomize_rotation = false
+
+[node name="Tree18" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.7229068, 0, -0.69094557, 0, 1, 0, 0.69094557, 0, -0.7229068, 26.14019, 0, -48.21116)
+randomize_rotation = false
+
+[node name="Tree19" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.9507757, 0, -0.30988008, 0, 1, 0, 0.30988008, 0, -0.9507757, 29.745657, 0, -42.426346)
+randomize_rotation = false
+
+[node name="Tree20" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.99969983, 0, 0.02450195, 0, 1, 0, -0.02450195, 0, -0.99969983, 31.29457, 0, -37.19128)
+randomize_rotation = false
+
+[node name="Tree21" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.9705738, 0, -0.24080405, 0, 1, 0, 0.24080405, 0, -0.9705738, 27.44515, 0, -32.30794)
+randomize_rotation = false
+
+[node name="Tree22" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.8405856, 0, -0.5416789, 0, 1, 0, 0.5416789, 0, -0.8405856, 24.41009, 0, -27.373207)
+randomize_rotation = false
+
+[node name="Tree23" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.8405856, 0, -0.5416789, 0, 1, 0, 0.5416789, 0, -0.8405856, 20.874355, 0, -21.305742)
+randomize_rotation = false
+
+[node name="Tree24" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.9605611, 0, -0.2780692, 0, 1, 0, 0.2780692, 0, -0.9605611, 10.099685, 0, -38.02604)
+randomize_rotation = false
+
+[node name="Tree26" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.9605611, 0, -0.2780692, 0, 1, 0, 0.2780692, 0, -0.9605611, 12.046614, 0, -31.300577)
+randomize_rotation = false
+
+[node name="Tree25" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(-0.9974158, 0, 0.07184562, 0, 1, 0, -0.07184562, 0, -0.9974158, 17.472866, 0, -34.43839)
+randomize_rotation = false
+
+[node name="Tree17" parent="Trees" instance=ExtResource("5_iqtul")]
+transform = Transform3D(0.41566184, 0, -0.90951926, 0, 1, 0, 0.90951926, 0, 0.41566184, 13.908333, 0, -49.991398)
+randomize_rotation = false
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_iqtul")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.8992145, 0.43750808, 0, -0.43750808, -0.8992145, 0, 5.0676866, 0)
+
+[node name="Bananas" type="Node3D" parent="."]
+
+[node name="Banana" parent="Bananas" instance=ExtResource("6_ajwnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.3693657, 1.7399306, -5.43931)
+
+[node name="Banana2" parent="Bananas" instance=ExtResource("6_ajwnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31315088, 4.352844, 0.14558959)
+
+[node name="Banana3" parent="Bananas" instance=ExtResource("6_ajwnh")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.31315088, 3.8112888, -6.929932)

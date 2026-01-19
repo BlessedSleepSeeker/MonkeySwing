@@ -1,12 +1,9 @@
-[gd_scene load_steps=7 format=3 uid="uid://cuwfi1kmekxs8"]
+[gd_scene load_steps=8 format=3 uid="uid://cuwfi1kmekxs8"]
 
 [ext_resource type="Script" uid="uid://bbyf7emrft17v" path="res://jungle/jungle.gd" id="1_4ldcj"]
 [ext_resource type="PackedScene" uid="uid://ca4dkddej25x" path="res://monkey/Monkey.tscn" id="1_blw3f"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4ldcj"]
-shading_mode = 2
-vertex_color_use_as_albedo = true
-albedo_color = Color(0.61, 0.24400003, 0, 1)
+[ext_resource type="Material" uid="uid://brmr1j4n0cpvr" path="res://jungle/textures/stylized_grass/stylized_grasstres.tres" id="3_sekhu"]
+[ext_resource type="Material" path="res://jungle/textures/wood/wood.tres" id="4_5l4bt"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_blw3f"]
 sky_top_color = Color(0.23000002, 0.5636667, 1, 1)
@@ -30,12 +27,22 @@ script = ExtResource("1_4ldcj")
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8160982, 0)
 
 [node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+material_override = ExtResource("3_sekhu")
 use_collision = true
 collision_layer = 2
 collision_mask = 0
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-size = Vector3(36.121826, 1, 31.057617)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 31.173645)
+size = Vector3(400, 1, 400)
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7354605, 19.932186, -8.613761)
+size = Vector3(5.2234497, 1, 3.6565914)
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.7354605, 12.003429, -33.750443)
+size = Vector3(5.2234497, 24.173859, 3.6565914)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7087097, 1.8709509, 12.671831)
@@ -49,16 +56,24 @@ size = Vector3(3.1631927, 2.828186, 3.0097198)
 transform = Transform3D(0.8847681, 0, -0.46603152, 0, 1, 0, 0.46603152, 0, 0.8847681, 2.3352957, 0.42373824, 11.682213)
 size = Vector3(3.1631927, 2.0380936, 3.0097198)
 
+[node name="CSGBox3D5" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.0049452484, 0.0034044087, 0.99998206, 0.567039, 0.823691, -4.299362e-08, -0.823676, 0.5670287, -0.006003827, 7.262432, 0.42373824, 27.243893)
+size = Vector3(26.386406, 2.0380936, 3.0097198)
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="CSGCombiner3D"]
+transform = Transform3D(-0.027194694, 0.018721122, -0.9994549, 0.567039, 0.823691, -4.3147168e-08, 0.8232418, -0.5667298, -0.033015598, 0.4413166, 0.42373824, -20.16383)
+size = Vector3(26.386406, 2.0380936, 3.0097198)
+
 [node name="CSGTree" type="CSGCombiner3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.288563, 4.1686745, 9.861706)
-material_override = SubResource("StandardMaterial3D_4ldcj")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.0812788, 10.82543, 11.643328)
+material_override = ExtResource("4_5l4bt")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGTree"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13229, 0.2911539, 0)
-height = 11.219299
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13229, -2.4977713, 0)
+height = 16.79715
 sides = 6
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGTree"]
@@ -77,15 +92,15 @@ radius = 0.25
 height = 3.158081
 
 [node name="CSGTree2" type="CSGCombiner3D" parent="."]
-transform = Transform3D(0.4266635, 0, -0.9044105, 0, 1, 0, 0.9044105, 0, 0.4266635, -17.140999, 3.4973378, 2.5856524)
-material_override = SubResource("StandardMaterial3D_4ldcj")
+transform = Transform3D(0.4266635, 0, -0.9044105, 0, 1, 0, 0.9044105, 0, 0.4266635, 5.099598, 14.168827, 0.9172735)
+material_override = ExtResource("4_5l4bt")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGTree2"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13229, 0.2911539, 0)
-height = 11.219299
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.1322904, -4.9653006, 4.7683716e-07)
+height = 21.732208
 sides = 6
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGTree2"]
@@ -104,15 +119,15 @@ radius = 0.25
 height = 3.158081
 
 [node name="CSGTree3" type="CSGCombiner3D" parent="."]
-transform = Transform3D(0.9998745, 0, -0.015846878, 0, 1, 0, 0.015846878, 0, 0.9998745, -4.495986, 4.065227, 4.5196056)
-material_override = SubResource("StandardMaterial3D_4ldcj")
+transform = Transform3D(0.9998745, 0, -0.015846878, 0, 1, 0, 0.015846878, 0, 0.9998745, -6.468706, 11.5127125, 4.5196056)
+material_override = ExtResource("4_5l4bt")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGTree3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13229, 0.2911539, 0)
-height = 11.219299
+transform = Transform3D(0.9999966, 0, 5.5879354e-09, 0, 1, 0, -5.5879354e-09, 0, 0.9999966, 7.132289, -3.2980642, 0)
+height = 18.397736
 sides = 6
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGTree3"]
@@ -120,32 +135,42 @@ transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 5.00
 radius = 0.3
 height = 3.9604492
 
-[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGTree3"]
-transform = Transform3D(-3.3683122e-08, -0.77058, 0.6373433, 1, -4.371139e-08, 0, 2.785916e-08, 0.6373433, 0.77058, 8.263203, 2.1120987, -0.996275)
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGTree3"]
+transform = Transform3D(-3.2269604e-08, -0.73824245, 0.6745333, 1, -4.371139e-08, 0, 2.9484807e-08, 0.6745333, 0.73824245, 5.3213964, -4.1698513, 1.5155764)
 radius = 0.3
-height = 3.4440918
+height = 5.5324707
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGTree3"]
+transform = Transform3D(-3.3683044e-08, -0.77058, 0.6373433, 1, -4.371139e-08, 0, 2.7859038e-08, 0.6373433, 0.77058, 7.9633703, 2.1120987, -0.74828553)
+radius = 0.3
+height = 2.6658936
 
 [node name="CSGCylinder3D4" type="CSGCylinder3D" parent="CSGTree3"]
-transform = Transform3D(-3.3683122e-08, -0.5962949, -0.8027655, 1, 2.2792968e-09, -4.3651923e-08, 2.785916e-08, -0.8027655, 0.5962949, 7.9519334, 4.3666773, 1.1911178)
+transform = Transform3D(-3.3683122e-08, -0.5962949, -0.8027648, 1, 2.2792968e-09, -4.3651923e-08, 2.7859139e-08, -0.8027648, 0.5962949, 8.098987, 3.0937319, 1.3890891)
 radius = 0.25
-height = 3.158081
+height = 3.6513062
 
 [node name="CSGTree4" type="CSGCombiner3D" parent="."]
-transform = Transform3D(0.9998745, 0, -0.015846878, 0, 1, 0, 0.015846878, 0, 0.9998745, -5.557288, 5.807102, -3.2277935)
-material_override = SubResource("StandardMaterial3D_4ldcj")
+transform = Transform3D(0.4450729, 0, -0.89549434, 0, 1, 0, 0.89549434, 0, 0.4450729, 0.8790121, 12.943424, -6.8918934)
+material_override = ExtResource("4_5l4bt")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGTree4"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13229, 0.2911539, 0)
-height = 11.219299
+transform = Transform3D(0.9999962, 0, 0, 0, 1, 0, 0, 0, 0.9999962, 7.132289, -7.0285864, -4.7683716e-07)
+height = 25.85878
 sides = 6
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGTree4"]
 transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 5.001317, 0, 0)
 radius = 0.3
 height = 3.9604492
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGTree4"]
+transform = Transform3D(-4.371139e-08, -0.6816026, 0.73172265, 1, -2.9793796e-08, 3.198461e-08, -1.7763568e-15, 0.73172265, 0.6816026, 6.5761795, -6.2956038, 0.6333623)
+radius = 0.3
+height = 2.7404785
 
 [node name="CSGCylinder3D3" type="CSGCylinder3D" parent="CSGTree4"]
 transform = Transform3D(-3.3683122e-08, -0.77058, 0.6373433, 1, -4.371139e-08, 0, 2.785916e-08, 0.6373433, 0.77058, 8.263203, 2.1120987, -0.996275)
@@ -158,19 +183,24 @@ radius = 0.25
 height = 3.158081
 
 [node name="CSGTree5" type="CSGCombiner3D" parent="."]
-transform = Transform3D(0.9998745, 0, -0.015846878, 0, 1, 0, 0.015846878, 0, 0.9998745, -7.7838316, 5.6342754, -11.911331)
-material_override = SubResource("StandardMaterial3D_4ldcj")
+transform = Transform3D(0.83837575, 0, -0.5450927, 0, 1, 0, 0.5450927, 0, 0.83837575, -7.7838316, 14.517304, -11.911331)
+material_override = ExtResource("4_5l4bt")
 use_collision = true
 collision_layer = 4
 collision_mask = 0
 
 [node name="CSGCylinder3D" type="CSGCylinder3D" parent="CSGTree5"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.13229, 0.2911539, 0)
-height = 11.219299
+transform = Transform3D(1.0000002, 0, 0, 0, 1, 0, 0, 0, 1.0000002, 7.1322913, -4.175071, 0)
+height = 20.151749
 sides = 6
 
 [node name="CSGCylinder3D2" type="CSGCylinder3D" parent="CSGTree5"]
-transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 5.001317, 0, 0)
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 9.201006, -2.5881193, 3.5762787e-07)
+radius = 0.3
+height = 3.9604492
+
+[node name="CSGCylinder3D5" type="CSGCylinder3D" parent="CSGTree5"]
+transform = Transform3D(-4.371139e-08, 0.21243346, 0.9771755, 1, 9.2857615e-09, 4.2713697e-08, 0, 0.9771755, -0.21243346, 7.5571294, -6.59778, 2.1636858)
 radius = 0.3
 height = 3.9604492
 
@@ -186,3 +216,6 @@ height = 3.158081
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_blw3f")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.8992145, 0.43750808, 0, -0.43750808, -0.8992145, 0, 5.0676866, 0)

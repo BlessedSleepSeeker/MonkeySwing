@@ -1,16 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://dybcbhcofn27q"]
+[gd_scene load_steps=2 format=3 uid="uid://dybcbhcofn27q"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4iunw"]
-albedo_color = Color(1, 0, 0, 1)
-
-[sub_resource type="SphereMesh" id="SphereMesh_4iunw"]
-material = SubResource("StandardMaterial3D_4iunw")
-radius = 0.2
-height = 0.4
-radial_segments = 8
-rings = 4
+[ext_resource type="PackedScene" uid="uid://bn5vnc1npgld1" path="res://monkey/skin/model/hand/CapuchinHand.gltf" id="1_47t5l"]
 
 [node name="RightHandMesh" type="Node3D"]
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("SphereMesh_4iunw")
+[node name="blockbench_export" parent="." instance=ExtResource("1_47t5l")]
+transform = Transform3D(6, 0, 0, 0, -2.6226832e-07, 6, 0, -6, -2.6226832e-07, 0, 0.13528554, 0)

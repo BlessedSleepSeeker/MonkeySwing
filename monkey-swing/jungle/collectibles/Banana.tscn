@@ -1,0 +1,145 @@
+[gd_scene load_steps=11 format=3 uid="uid://c4b88mpgi2rgn"]
+
+[ext_resource type="Script" uid="uid://cicdbpsna7p1t" path="res://jungle/collectibles/banana.gd" id="1_1c5l1"]
+[ext_resource type="PackedScene" uid="uid://c36fb5wxjpaae" path="res://jungle/collectibles/Banana.glb" id="1_osj5p"]
+[ext_resource type="PackedScene" uid="uid://co75xjj6oudb4" path="res://sounds/utils/random_stream_player.tscn" id="2_kcpsn"]
+[ext_resource type="AudioStream" uid="uid://cb57ppo7wvlfj" path="res://sounds/sfx/bananas/jump1.ogg" id="4_jx1jb"]
+[ext_resource type="AudioStream" uid="uid://dvmb21qejr2a1" path="res://sounds/sfx/bananas/jump2.ogg" id="5_dheqm"]
+
+[sub_resource type="Animation" id="Animation_1c5l1"]
+resource_name = "hover"
+length = 6.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Banana:position")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2, 3, 4, 5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.4, 0), Vector3(0, 0, 0), Vector3(0, 0.4, 0), Vector3(0, 0, 0), Vector3(0, 0.4, 0), Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Banana:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = false
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 6),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 6.2831855, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Banana:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 1.5, 3, 4.5, 6),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1), Vector3(1.2, 1.2, 1.2), Vector3(1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_qbcah"]
+resource_name = "taken"
+length = 0.4
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Banana:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(1, 1, 1), Vector3(0.01, 0.01, 0.01)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Banana:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.4),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 18.849556, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_kcpsn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Banana:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Banana:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("Banana:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(1, 1, 1)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_12b2e"]
+_data = {
+&"RESET": SubResource("Animation_kcpsn"),
+&"hover": SubResource("Animation_1c5l1"),
+&"taken": SubResource("Animation_qbcah")
+}
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_kcpsn"]
+
+[node name="Banana" type="Area3D"]
+collision_layer = 8
+input_ray_pickable = false
+script = ExtResource("1_1c5l1")
+
+[node name="Banana" parent="." instance=ExtResource("1_osj5p")]
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_12b2e")
+}
+autoplay = "hover"
+
+[node name="RandomStreamPlayer" parent="." instance=ExtResource("2_kcpsn")]
+volume_db = -18.0
+bus = &"SFX"
+streams = Array[AudioStream]([ExtResource("4_jx1jb"), ExtResource("5_dheqm")])
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_kcpsn")

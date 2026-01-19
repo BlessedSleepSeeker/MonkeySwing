@@ -1,0 +1,9 @@
+[gd_resource type="ORMMaterial3D" load_steps=3 format=3 uid="uid://db875pc07k121"]
+
+[ext_resource type="Texture2D" uid="uid://cj17jpwouejgy" path="res://jungle/textures/rock/rock_albedo.png" id="1"]
+[ext_resource type="Texture2D" uid="uid://bjfh4jybile2j" path="res://jungle/textures/rock/rock_normal.png" id="3"]
+
+[resource]
+albedo_texture = ExtResource("1")
+normal_enabled = true
+normal_texture = ExtResource("3")
