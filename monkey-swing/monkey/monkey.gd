@@ -12,6 +12,8 @@ class_name Monkey
 @onready var hud: MonkeyHUD = %MonkeyHUD
 #@onready var particles_manager: ParticlesManager = %ParticlesManager
 
+@onready var stamina_recharge_timer: Timer = %StaminaRechargeTimer
+
 var direction: Vector3 = Vector3.ZERO
 var raw_input: Vector2 = Vector2.ZERO
 var last_movement_direction: Vector3 = Vector3.BACK
@@ -28,6 +30,8 @@ var did_double_jump: bool = false:
 
 var current_stamina: float = max_stamina:
 	set(value):
+		if value < current_stamina:
+			stamina_recharge_timer.start()
 		current_stamina = clampf(value, 0, max_stamina)
 		stamina_updated.emit(current_stamina, max_stamina)
 
@@ -71,5 +75,5 @@ func respawn(respawn_global_position: Vector3) -> void:
 	self.velocity = Vector3.ZERO
 
 func _physics_process(_delta):
-	if state_machine.state.name != "Climb":
+	if state_machine.state.name != "Climb" && stamina_recharge_timer.is_stopped():
 		self.current_stamina += _delta

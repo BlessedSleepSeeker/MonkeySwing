@@ -14,6 +14,9 @@ var right_arm_attached: bool = false:
 		if right_arm_attached:
 			arm_used.emit(true)
 			random_stream_player.play_random()
+			play_animation("arm_attached_right")
+		else:
+			play_animation("arm_detach_right")
 
 var left_arm_attached: bool = false:
 	set(value):
@@ -23,12 +26,16 @@ var left_arm_attached: bool = false:
 		if left_arm_attached:
 			arm_used.emit(false)
 			random_stream_player.play_random()
+			play_animation("arm_attached_left")
+		else:
+			play_animation("arm_detach_left")
 
 var try_use_right_arm: bool = false:
 	set(value):
 		try_use_right_arm = value
 		if try_use_right_arm:
 			trying_to_attach_arm.emit(true)
+			play_animation("arm_try_attach_right")
 		elif not right_arm_attached:
 			not_using_arm.emit(true)
 
@@ -37,6 +44,7 @@ var try_use_left_arm: bool = false:
 		try_use_left_arm = value
 		if try_use_left_arm:
 			trying_to_attach_arm.emit(false)
+			play_animation("arm_try_attach_left")
 		elif not left_arm_attached:
 			not_using_arm.emit(false)
 
@@ -154,14 +162,16 @@ func swing(_delta: float) -> void:
 	var new_point = swing_center + (swing_center.direction_to(future_pos) * distance)
 	## Update velocity to go in the direction of the new_point.
 
-	
+
 	character.velocity = (new_point - character.global_position) / _delta
 
+	## BUGGED AF
 	## if you alternate between right and left arm, you get a velocity boost
-	var swing_multiplier = 1.0
-	if (last_arm_used == LastArmUsed.LEFT && right_arm_attached && not left_arm_attached) || (last_arm_used == LastArmUsed.RIGHT && left_arm_attached && not right_arm_attached):
-		swing_multiplier = 1.2
-	character.velocity *= swing_multiplier
+	# var swing_multiplier = 1.0
+	# if (last_arm_used == LastArmUsed.LEFT && right_arm_attached && not left_arm_attached) || (last_arm_used == LastArmUsed.RIGHT && left_arm_attached && not right_arm_attached):
+	# 	print("speeding up")
+	# 	swing_multiplier = 1.2
+	# character.velocity *= swing_multiplier
 
 func physics_update(_delta: float, _move_character: bool = true):
 	super(_delta, false)

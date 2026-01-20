@@ -7,7 +7,7 @@ class_name FPSCamera
 
 signal is_colliding(is_colliding: bool)
 
-var raycast_range: float = 6:
+var raycast_range: float = 4:
 	set(value):
 		raycast_range = value
 		raycast.target_position.z = -value
@@ -16,6 +16,8 @@ var _camera_input_direction: Vector2 = Vector2.ZERO
 
 var character: Monkey
 var real_camera = self
+
+var inverse_vertical: bool = false
 
 func _ready():
 	character = owner as Monkey
@@ -34,10 +36,15 @@ func _unhandled_input(_event: InputEvent):
 	if _event is InputEventMouseButton:
 		pass
 
+	if Input.is_action_just_pressed("invert_mouse_vertical"):
+		inverse_vertical = !inverse_vertical
+
 func rotate_camera(_delta) -> void:
 	## Inverse the input if the option is toggled on.
 	# if settings.read_setting_value_by_key("INVERSE_CAMERA"):
 	# 	_camera_input_direction = _camera_input_direction * -1
+	if inverse_vertical:
+		_camera_input_direction.y = _camera_input_direction.y * -1
 
 	##	We scale the speed during bullet time, so they can move the camera faster during it.
 	if character.bullet_time_on:

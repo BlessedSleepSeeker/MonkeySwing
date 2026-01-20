@@ -9,8 +9,8 @@ func _ready():
 
 func _on_body_entered(body: Node3D) -> void:
 	if body is Monkey:
-		self.monitoring = false
-		self.monitorable = false
+		self.set_deferred("monitoring", false)
+		self.set_deferred("monitorable", false)
 		anim_player.play("taken")
 		rdm_stream_player.play_random()
 		await anim_player.animation_finished

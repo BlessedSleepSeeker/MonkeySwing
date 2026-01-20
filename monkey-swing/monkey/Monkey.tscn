@@ -1,4 +1,4 @@
-[gd_scene load_steps=42 format=3 uid="uid://ca4dkddej25x"]
+[gd_scene load_steps=43 format=3 uid="uid://ca4dkddej25x"]
 
 [ext_resource type="Script" uid="uid://s1oekavjwvj7" path="res://monkey/monkey.gd" id="1_ivco1"]
 [ext_resource type="PackedScene" uid="uid://dglb4bxycqdhl" path="res://monkey/skin/MonkeySkin.tscn" id="2_jgt8y"]
@@ -32,6 +32,7 @@
 [ext_resource type="AudioStream" uid="uid://b0natn0coeyhy" path="res://sounds/sfx/swinging/woosh8.ogg" id="28_hpsm2"]
 [ext_resource type="Script" uid="uid://cx184q2tbvcin" path="res://monkey/state_machine/states/slide.gd" id="29_l2s1s"]
 [ext_resource type="Script" uid="uid://ci55vebqfn05b" path="res://monkey/state_machine/states/climb.gd" id="29_qor3x"]
+[ext_resource type="AudioStream" uid="uid://bow5d3vt1c3d2" path="res://sounds/sfx/sliding/slide.ogg" id="30_te4x1"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_jgt8y"]
 radius = 0.49414063
@@ -60,7 +61,7 @@ metadata/_custom_type_script = "uid://bf6dv1jvpucqc"
 
 [sub_resource type="Resource" id="Resource_te4x1"]
 script = ExtResource("10_jqkgq")
-GRAVITY = 0.0
+GRAVITY = -15.0
 MAX_SPEED = 4.0
 FRICTION = 10.0
 metadata/_custom_type_script = "uid://bf6dv1jvpucqc"
@@ -84,7 +85,6 @@ active_camera = NodePath("FPSCamera")
 
 [node name="MonkeySkin" parent="." instance=ExtResource("2_jgt8y")]
 unique_name_in_owner = true
-visible = false
 
 [node name="Hitbox" type="CollisionShape3D" parent="."]
 unique_name_in_owner = true
@@ -98,7 +98,7 @@ visible = false
 
 [node name="FPSCamera" parent="." instance=ExtResource("4_6tjul")]
 unique_name_in_owner = true
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0.9456755, 0.273063)
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 1, 0)
 
 [node name="StateMachine" type="Node" parent="."]
 unique_name_in_owner = true
@@ -148,6 +148,7 @@ no_repeat = false
 
 [node name="Fall" type="Node" parent="StateMachine"]
 script = ExtResource("12_lqiej")
+should_play_animation_on_enter = false
 update_max_speed_on_enter = true
 physics_parameters = SubResource("Resource_1kvii")
 
@@ -159,6 +160,7 @@ bus = &"SFX"
 
 [node name="ArmAttached" type="Node" parent="StateMachine"]
 script = ExtResource("15_c1ut0")
+should_play_animation_on_enter = false
 physics_parameters = SubResource("Resource_c1ut0")
 
 [node name="RandomStreamPlayer" parent="StateMachine/ArmAttached" instance=ExtResource("8_1f6af")]
@@ -169,7 +171,8 @@ streams = Array[AudioStream]([ExtResource("21_yg7sb"), ExtResource("22_qor3x"), 
 script = ExtResource("29_l2s1s")
 physics_parameters = SubResource("Resource_te4x1")
 
-[node name="RandomStreamPlayer" parent="StateMachine/Slide" instance=ExtResource("8_1f6af")]
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="StateMachine/Slide"]
+stream = ExtResource("30_te4x1")
 bus = &"SFX"
 
 [node name="Climb" type="Node" parent="StateMachine"]
@@ -193,3 +196,8 @@ script = ExtResource("14_ocgks")
 
 [node name="MonkeyHUD" parent="." instance=ExtResource("15_bgwvf")]
 unique_name_in_owner = true
+
+[node name="StaminaRechargeTimer" type="Timer" parent="."]
+unique_name_in_owner = true
+process_callback = 0
+one_shot = true

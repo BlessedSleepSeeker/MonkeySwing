@@ -17,6 +17,7 @@ material = SubResource("StandardMaterial3D_1pvb5")
 
 [node name="Camera3D" type="Camera3D" parent="."]
 unique_name_in_owner = true
+cull_mask = 393215
 current = true
 
 [node name="CameraPosition" type="Node3D" parent="."]

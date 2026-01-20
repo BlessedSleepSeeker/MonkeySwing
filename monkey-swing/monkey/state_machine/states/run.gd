@@ -11,7 +11,7 @@ class_name RunState
 
 func enter(_msg := {}) -> void:
 	super()
-	anim_duration = 1#character.skin.animation_tree.get_animation(self.name).length
+	anim_duration = 0.5#character.skin.animation_tree.get_animation(self.name).length
 	loop_sound()
 
 func unhandled_input(_event: InputEvent):
@@ -23,7 +23,7 @@ func loop_sound():
 	rdm_stream_player.play_random()
 	await get_tree().create_timer(rdm_stream_delay).timeout
 	rdm_stream_player2.play_random()
-	animation_looping_timer.wait_time = anim_duration / 2
+	animation_looping_timer.wait_time = anim_duration
 	animation_looping_timer.timeout.connect(play_sound)
 	animation_looping_timer.start()
 	

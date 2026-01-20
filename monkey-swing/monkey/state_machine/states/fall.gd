@@ -13,6 +13,10 @@ func enter(_msg := {}) -> void:
 		can_coyote_time = true
 	if _msg["PreviousState"] == "Jump":
 		frame_count = dj_minimum_delay + 1
+	if character.velocity.y > 0:
+		play_animation("Rise")
+	else:
+		play_animation("Fall")
 
 func unhandled_input(_event: InputEvent):
 	super(_event)

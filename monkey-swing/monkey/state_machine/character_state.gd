@@ -36,7 +36,7 @@ func enter(_msg := {}) -> void:
 	# if self.camera_parameters.SPRING_ARM_ENTER_STATE_SET_VALUE != -1:
 	# 	character.tps_camera.tween_spring_length(self.camera_parameters.SPRING_ARM_ENTER_STATE_SET_VALUE, self.camera_parameters.SPRING_ARM_SPEED)
 	#character.tps_camera.raycast_range = physics_parameters.GRAPPLE_MAX_RANGE
-	#character.fps_camera.raycast_range = physics_parameters
+	character.fps_camera.raycast_range = physics_parameters.GRAPPLE_MAX_RANGE - character.fps_camera.position.z
 	if character.has_meta("debug_canvas"):
 		character.debug_canvas.set_state(self.name)
 	if update_max_speed_on_enter:

@@ -47,4 +47,4 @@ func unhandled_input(_event: InputEvent) -> void:
 		stop_climb_state()
 
 func exit() -> void:
-	pass
+	print("exiting climb")
